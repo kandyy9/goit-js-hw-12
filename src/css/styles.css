@@ -117,7 +117,7 @@ img{
   color: transparent;
 }
 
-.form button{
+.form button, .load-more-btn{
   background-color: #4e75ff;
   border-radius: 8px;
   padding: 8px 16px;
@@ -127,7 +127,8 @@ img{
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.form button:hover{
+.form button:hover,
+.load-more-btn:hover{
   background-color:#6c8cff;
 }
 
@@ -188,4 +189,9 @@ img{
   font-size: 12px;
   line-height: 200%;
   color: #2e2f42;
+}
+
+.load-more-btn{
+  display: none;
+  margin: 32px auto;
 }

@@ -1,6 +1,4 @@
 export const renderGallery = (images, galleryElement) => {
-    galleryElement.innerHTML = "";
-
     const galleryItems = images.map(image =>
         `<li class="gallery-item">
             <a class="gallery-link" href="${image.largeImageURL}">
