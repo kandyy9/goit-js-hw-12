@@ -47,38 +47,36 @@ form.addEventListener("submit", async (evt) => {
     }
 
     try {
-        const response = await fetchImages(query)
-                loader.style.display = "none";
-                if (response.data.totalHits === 0) {
-                    evt.target.elements.search.value = "";
-                    throw new Error("No images found");
-                }
-                clearGallery(gallery);
-                await renderGallery(response.data.hits, gallery);
-                clearSearchValue(evt);
-                smplGallery.refresh();
+        const response = await fetchImages(query);
+        loader.style.display = "none";
+        if (response.data.totalHits === 0) {
+            evt.target.elements.search.value = "";
+            throw new Error("No images found");
+        }
+        clearGallery(gallery);
+        await renderGallery(response.data.hits, gallery);
+        clearSearchValue(evt);
+        smplGallery.refresh();
 
-                if (response.data.hits.length < imagesPerPage) {
-                    loadMoreBtn.style.display = "none";
-                    iziToast.info({
-                        title: "Info",
-                        message: "We're sorry, but you've reached the end of search results.",
-                        position: "topRight"
-                    });
-                }
-                return query;
-            }
-        catch(error){
+        if (response.data.totalHits <= imagesPerPage) {
             loadMoreBtn.style.display = "none";
-            loader.style.display = "none";
-            iziToast.error({ 
-                title: "Error", 
-                message: `Sorry, there are no images matching your search query. Please try again! Error: ${error.message}`, 
-                position: "topRight" 
+            iziToast.info({
+                title: "Info",
+                message: "We're sorry, but you've reached the end of search results.",
+                position: "topRight"
             });
-            clearSearchValue(evt);
-            clearGallery(gallery);
-        };
+        }
+    } catch (error) {
+        loadMoreBtn.style.display = "none";
+        loader.style.display = "none";
+        iziToast.error({ 
+            title: "Error", 
+            message: `Sorry, there are no images matching your search query. Please try again! Error: ${error.message}`, 
+            position: "topRight" 
+        });
+        clearSearchValue(evt);
+        clearGallery(gallery);
+    }
 });
 
 loadMoreBtn.addEventListener("click", async () => {
@@ -119,4 +117,3 @@ loadMoreBtn.addEventListener("click", async () => {
         });
     }
 });
-
