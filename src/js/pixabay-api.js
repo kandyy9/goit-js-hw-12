@@ -7,7 +7,6 @@ export const fetchImages = async (query) => {
         return response;
     }
     catch (error) {    
-        console.log(error);
         throw new Error(error.message);
     }     
 };
@@ -20,7 +19,6 @@ export const loadMoreImages = async (query, pageCount) => {
         return response;
     }
     catch (error) {
-        console.log(error);
-        throw new Error("We're sorry, but you've reached the end of search results.");
+        throw new Error();
     }
 }

@@ -1,4 +1,4 @@
-export const renderGallery = (images, galleryElement) => {
+export const renderGallery = async (images, galleryElement) => {
     const galleryItems = images.map(image =>
         `<li class="gallery-item">
             <a class="gallery-link" href="${image.largeImageURL}">
